@@ -7,7 +7,6 @@ class HashTableEntry:
         self.value = value
         self.next = None
 
-
 # Hash table can't have fewer than this many slots
 MIN_CAPACITY = 8
 
@@ -22,6 +21,9 @@ class HashTable:
 
     def __init__(self, capacity):
         # Your code here
+        self.capacity = capacity
+        self.count = 0
+        self.storage = [None] * capacity
 
 
     def get_num_slots(self):
@@ -82,7 +84,13 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        rando = HashTableEntry(key, value)
+        index.self.hash_index(key)
+        if self.storage[index] is None:
+            self.storage[index] = rando
+        else:
+            rando.next = self.storage[index]
+            self.storage[index] = rando
 
     def delete(self, key):
         """
@@ -104,7 +112,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        
 
     def resize(self, new_capacity):
         """
@@ -114,6 +122,15 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        copy = self.storage
+        self.storage = [None] * new_capacity 
+        self.capacity = new_capacity
+        for i in copy:
+            if copy is not None:
+                current = i 
+            while current:
+                self.put(current.key, current.value)
+                current = current.next
 
 
 
